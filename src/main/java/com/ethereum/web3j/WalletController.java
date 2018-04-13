@@ -3,6 +3,7 @@ package com.ethereum.web3j;
 import com.ethereum.web3j.domains.BetrUser;
 import com.ethereum.web3j.domains.repos.BetrUserRepository;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import org.web3j.crypto.WalletFile;
 import org.web3j.crypto.WalletUtils;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.response.EthAccounts;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
@@ -63,16 +65,13 @@ public class WalletController {
             SBootEtherDock.password,
             user.getWalletMnemonic()//SBootEtherDock.walletMnemonic
     );
-    System.out.println("WalletController owner \n credentials.address : " + ownerCredentials.getAddress()
-            + "\n, prK = " + ownerCredentials.getEcKeyPair().getPrivateKey()
-            + "\n, pK  = " + ownerCredentials.getEcKeyPair().getPublicKey()
-    );
 
     Credentials user1Cred = WalletUtils.loadBip39Credentials(
             SBootEtherDock.password,
             user1.getWalletMnemonic()//SBootEtherDock.walletMnemonic
     );
     toAddress = user1Cred.getAddress();
+    System.out.println(" --- ");
 
   }
 
@@ -102,36 +101,28 @@ public class WalletController {
   }
 
   @GetMapping("/send")
-  public String sendFunds() throws Exception {
-
-    System.out.println("send 0.0001ETH to " + toAddress);
+  public TransactionReceipt sendFunds() throws Exception {
     TransactionReceipt transactionReceipt = sendEther(0.0001, toAddress);
     if (transactionReceipt == null) {
-      return "Send failed";
+      return null;
     }
-    System.out.println("SUCCESS sending 0.0001ETH to " + toAddress);
-    return "/send OK " + transactionReceipt.toString() + ", balance = " + getBalanceTransaction(toAddress);
+    return transactionReceipt;
   }
 
   @GetMapping("/send/{toAddress}")
-  public String sendFunds(@PathVariable String toAddress) throws Exception {
-    System.out.println("send 0.0001ETH to " + toAddress);
+  public TransactionReceipt sendFunds(@PathVariable String toAddress) throws Exception {
 
     TransactionReceipt transactionReceipt = sendEther(0.0001, toAddress);
     if (transactionReceipt == null) {
-
-      return "Send failed";
+      return null;
     }
-    System.out.println("SUCCESS sending 0.0001ETH to " + toAddress);
-    return "/send OK " + transactionReceipt.toString() + ", balance = " + getBalanceTransaction(toAddress);
+    return transactionReceipt;
   }
 
   @GetMapping("/send/{userId}/{user1Id}")
   public TransactionReceipt sendFundsFromUserToUser1(@PathVariable Long userId, @PathVariable Long user1Id) throws Exception {
     BetrUser user = betrUserRepository.findById(userId).get();
     BetrUser user1 = betrUserRepository.findById(user1Id).get();
-
-    System.out.println("send 0.0001ETH from " + user.getWalletAddress());
 
     Credentials userCred = WalletUtils.loadBip39Credentials(
             SBootEtherDock.password,
@@ -146,21 +137,61 @@ public class WalletController {
 
       return null;
     }
-    System.out.println("SUCCESS sending 0.0001ETH to " + user1.getWalletAddress());
     return transactionReceipt;
   }
 
+  class C implements Serializable {
+
+    private static final long serialVersionUID = 3L;
+    EthAccounts accounts;
+    Credentials credentials;
+
+    public Credentials getCredentials() {
+      return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+      this.credentials = credentials;
+    }
+    Web3ClientVersion clientVersion;
+
+    public Web3ClientVersion getClientVersion() {
+      return clientVersion;
+    }
+
+    public void setClientVersion(Web3ClientVersion clientVersion) {
+      this.clientVersion = clientVersion;
+    }
+
+    public EthAccounts getAccounts() {
+      return accounts;
+    }
+
+    public void setAccounts(EthAccounts accounts) {
+      this.accounts = accounts;
+    }
+
+  }
+
   @GetMapping("/info")
-  public String get() throws IOException {// throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, CipherException, IOException {
-    System.out.println(" --- / get() ");
+  public C info() throws IOException {// throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, CipherException, IOException {
+    System.out.println(" --- / info() ");
     Web3ClientVersion web3ClientVersion = web3j.web3ClientVersion().send();
     System.out.println(" --- web3.version = " + web3ClientVersion.getWeb3ClientVersion());
 
     System.out.println(" --- web3j : " + web3j.ethAccounts().getJsonrpc());
     System.out.println(" --- web3j : " + web3j.ethAccounts().getMethod());
-    System.out.println(" --- web3j : " + web3j.ethAccounts().getParams());
+//    org.web3j.protocol.core.methods.response.EthAccounts ea;
 
-    return "Info";
+    System.out.println("Wallet owner \n credentials.address : " + ownerCredentials.getAddress()
+            + "\n, prK = " + ownerCredentials.getEcKeyPair().getPrivateKey()
+            + "\n, pK  = " + ownerCredentials.getEcKeyPair().getPublicKey()
+    );
+    C c = new C();
+    c.setAccounts(web3j.ethAccounts().send());
+    c.setClientVersion(web3ClientVersion);
+    c.setCredentials(ownerCredentials);
+    return c;
   }
 
   public TransactionReceipt sendEther(double val, String toAddress) {
