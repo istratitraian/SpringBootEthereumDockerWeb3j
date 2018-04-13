@@ -1,0 +1,7 @@
+  #npm install -g solc
+> solc Kickstart.sol --bin --abi --optimize -o KistartContract # to generate Campaign.bin Campaign.abi
+
+
+> web3j solidity generate Campaign.bin Campaign.abi -o java -p com.ethereum.web3j
+> web3j solidity generate CampaignFactory.bin CampaignFactory.abi -o java -p com.ethereum.web3j
+

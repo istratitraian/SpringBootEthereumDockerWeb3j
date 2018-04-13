@@ -1,0 +1,8 @@
+### clean and build project
+mvn clean package
+
+
+### creates and mounts Docker.image
+### docker build -file "Dockerfile", -tag-name must be in lowercase, where to store image "." curent dir
+
+docker build -f Dockerfile -t sbootweb3dockerimage . 
