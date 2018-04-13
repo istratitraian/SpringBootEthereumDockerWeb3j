@@ -53,6 +53,7 @@ public class WalletController {
 
   }
 
+  //init
   @PostConstruct
   private void init() {
     BetrUser user = betrUserRepository.findByUsername("istrati.traian").get();
