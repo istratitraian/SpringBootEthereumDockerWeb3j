@@ -1,4 +1,6 @@
 /target/
+/nbactions.xml
+/betr.mv.db
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
