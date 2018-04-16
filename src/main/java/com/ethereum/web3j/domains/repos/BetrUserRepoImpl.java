@@ -14,6 +14,12 @@ public class BetrUserRepoImpl implements BetrUserRepository {
   private final Map<String, Optional<BetrUser>> users = new HashMap<>();
   private final Map<Long, Optional<BetrUser>> usersIds = new HashMap<>();
 
+  private static long countId = 1;
+
+  public static long getCountId() {
+    return countId;
+  }
+
   public BetrUserRepoImpl() {
     System.out.println("BetrUserRepoImpl");
   }
@@ -25,6 +31,7 @@ public class BetrUserRepoImpl implements BetrUserRepository {
 
   @Override
   public void save(BetrUser user) {
+    user.setId(countId++);
     users.put(user.getUsername(), Optional.of(user));
     usersIds.put(user.getId(), Optional.of(user));
   }

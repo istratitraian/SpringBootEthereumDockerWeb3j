@@ -14,6 +14,8 @@ public interface BetrUserRepository
 
 	Optional<BetrUser> findByUsername(String username);
 
+        ////////////////////
+        
 	void save(BetrUser user);
 
 	Collection<Optional<BetrUser>> findAll();

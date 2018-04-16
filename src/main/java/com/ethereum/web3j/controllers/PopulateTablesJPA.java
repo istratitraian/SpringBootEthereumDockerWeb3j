@@ -37,8 +37,7 @@ public class PopulateTablesJPA {
 
     BetrUser user = new BetrUser();
 
-    user.setId(1L);
-
+//    user.setId(1L);
     user.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
     user.setFirstName("Istrati");
     user.setLastName("Traian");
@@ -58,8 +57,7 @@ public class PopulateTablesJPA {
 
     BetrUser user1 = new BetrUser();
 
-    user1.setId(2L);
-
+//    user1.setId(2L);
     user1.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
     user1.setFirstName("Ion");
     user1.setLastName("manolache");
