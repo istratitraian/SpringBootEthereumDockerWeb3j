@@ -1,24 +1,25 @@
-package com.ethereum.web3j;
+package com.ethereum.web3j.controllers;
 
+import com.ethereum.web3j.SBootEtherDock;
+import com.ethereum.web3j.SecurityConfig;
+import com.ethereum.web3j.domains.repos.AuthorityRepository;
+import com.ethereum.web3j.domains.repos.BetrUserRepository;
 import static com.ethereum.web3j.SBootEtherDock.password;
 import static com.ethereum.web3j.SBootEtherDock.walletMnemonic;
 import com.ethereum.web3j.domains.BetrUser;
-import com.ethereum.web3j.domains.repos.AuthorityRepository;
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
-import com.ethereum.web3j.domains.repos.BetrUserRepository;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * @author I.T.W764
  */
 @Component
-public class PopulateTablesJPA implements ApplicationListener<ContextRefreshedEvent> {
+public class PopulateTablesJPA {
 
   @Resource(name = "passwordEncoder")
   private PasswordEncoder passwordEncoder;
@@ -29,9 +30,8 @@ public class PopulateTablesJPA implements ApplicationListener<ContextRefreshedEv
   @Autowired
   private AuthorityRepository authorityRepository;
 
-  @Override
-//  @PostConstruct
-  public void onApplicationEvent(ContextRefreshedEvent event) {
+  @PostConstruct
+  public void onApplicationEvent() {
     authorityRepository.save(SecurityConfig.AUTHORITY_CLIENT);
     authorityRepository.save(SecurityConfig.AUTHORITY_SU_ADMIN);
 

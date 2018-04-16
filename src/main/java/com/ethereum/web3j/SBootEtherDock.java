@@ -6,10 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan({"com.ethereum.web3j", "com.ethereum.web3j.domains.repos", "com.ethereum.web3j.controllers"})
 @SpringBootApplication
-@ComponentScan({"controllers", "domains.repos", "domains.repos.security"})
-public class SBootEtherDock
-        extends SpringBootServletInitializer {
+public class SBootEtherDock//
+        extends SpringBootServletInitializer//
+{
 
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

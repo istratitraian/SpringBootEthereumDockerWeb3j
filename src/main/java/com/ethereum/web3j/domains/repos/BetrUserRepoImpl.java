@@ -5,15 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
-
 import com.ethereum.web3j.domains.BetrUser;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class BetrUserRepoImpl implements BetrUserRepository {
 
   private final Map<String, Optional<BetrUser>> users = new HashMap<>();
   private final Map<Long, Optional<BetrUser>> usersIds = new HashMap<>();
+
+  public BetrUserRepoImpl() {
+    System.out.println("BetrUserRepoImpl");
+  }
 
   @Override
   public Optional<BetrUser> findByUsername(String username) {

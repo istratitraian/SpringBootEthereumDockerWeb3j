@@ -1,8 +1,8 @@
 package com.ethereum.web3j.controllers;
 
+import com.ethereum.web3j.domains.repos.BetrUserRepository;
 import com.ethereum.web3j.SBootEtherDock;
 import com.ethereum.web3j.domains.BetrUser;
-import com.ethereum.web3j.domains.repos.BetrUserRepository;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -56,7 +56,6 @@ public class WalletController {
 
   }
 
-  //init
   @PostConstruct
   private void init() {
     BetrUser user = betrUserRepository.findByUsername("istrati.traian").get();

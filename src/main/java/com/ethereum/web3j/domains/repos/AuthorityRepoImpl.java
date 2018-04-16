@@ -3,12 +3,12 @@ package com.ethereum.web3j.domains.repos;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 import com.ethereum.web3j.domains.security.Authority;
 import java.util.Collection;
+import org.springframework.stereotype.Repository;
 
-@Repository
+//@Component
+@Repository//("authorityRepoImpl")
 public class AuthorityRepoImpl implements AuthorityRepository {
 
   private final Map<String, Authority> auths = new HashMap<>();
