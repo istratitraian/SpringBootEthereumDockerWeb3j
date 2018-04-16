@@ -6,32 +6,32 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import org.springframework.data.annotation.Transient;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.FetchType;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
+//import javax.persistence.ManyToMany;
+//import javax.persistence.Table;
+//import org.springframework.data.annotation.Transient;
 
 /**
  * @author I.T.W764
  */
-@Entity
-@Table(name = "Authorities")
+//@Entity
+//@Table(name = "Authorities")
 public class Authority extends AbstractDomain {
 
   private static final long serialVersionUID = 1L;
 
-  @Column(unique = true)
+//  @Column(unique = true)
   private String authority;
 
   @JsonIgnore
-  @JoinTable(name = "users_x_authorities",
-          joinColumns = @JoinColumn(name = "authority"),
-          inverseJoinColumns = @JoinColumn(name = "user"))
-  @ManyToMany(fetch = FetchType.LAZY)
+//  @JoinTable(name = "users_x_authorities",
+//          joinColumns = @JoinColumn(name = "authority"),
+//          inverseJoinColumns = @JoinColumn(name = "user"))
+//  @ManyToMany(fetch = FetchType.LAZY)
   private Set<BetrUser> users = new HashSet<>();
 
   public Authority() {
@@ -57,13 +57,13 @@ public class Authority extends AbstractDomain {
     this.users = users;
   }
 
-  @Transient
+//  @Transient
   public void addBetrUser(BetrUser user) {
     this.users.add(user);
 //    user.addAuthority(this);
   }
 
-  @Transient
+//  @Transient
   public void removeBetrUser(BetrUser user) {
     this.users.remove(user);
 //    user.removeAuthority(this);

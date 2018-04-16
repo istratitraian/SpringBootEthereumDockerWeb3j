@@ -4,7 +4,6 @@ import static com.ethereum.web3j.SBootEtherDock.password;
 import static com.ethereum.web3j.SBootEtherDock.walletMnemonic;
 import com.ethereum.web3j.domains.BetrUser;
 import com.ethereum.web3j.domains.repos.AuthorityRepository;
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,12 +11,14 @@ import org.springframework.stereotype.Component;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
 import com.ethereum.web3j.domains.repos.BetrUserRepository;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
  * @author I.T.W764
  */
 @Component
-public class PopulateTablesJPA {
+public class PopulateTablesJPA implements ApplicationListener<ContextRefreshedEvent> {
 
   @Resource(name = "passwordEncoder")
   private PasswordEncoder passwordEncoder;
@@ -28,13 +29,16 @@ public class PopulateTablesJPA {
   @Autowired
   private AuthorityRepository authorityRepository;
 
-  @PostConstruct
-  public void saveToH2inMemDB() {
-
+  @Override
+//  @PostConstruct
+  public void onApplicationEvent(ContextRefreshedEvent event) {
     authorityRepository.save(SecurityConfig.AUTHORITY_CLIENT);
     authorityRepository.save(SecurityConfig.AUTHORITY_SU_ADMIN);
 
     BetrUser user = new BetrUser();
+
+    user.setId(1L);
+
     user.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
     user.setFirstName("Istrati");
     user.setLastName("Traian");
@@ -53,6 +57,9 @@ public class PopulateTablesJPA {
     betrUserRepository.save(user);
 
     BetrUser user1 = new BetrUser();
+
+    user1.setId(2L);
+
     user1.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
     user1.setFirstName("Ion");
     user1.setLastName("manolache");
@@ -69,9 +76,9 @@ public class PopulateTablesJPA {
     user1.setWalletAddress(user1Creds.getAddress());
 
     betrUserRepository.save(user1);
-    
-    
-//    System.out.println("PopulateTables allUsers : "+betrUserRepository.findAll());
+
+    System.out.println("PopulateTables allAuthorities : " + authorityRepository.findAll());
+    System.out.println("PopulateTables allUsers : " + betrUserRepository.findAll());
 
   }
 }

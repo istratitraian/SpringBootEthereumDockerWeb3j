@@ -5,19 +5,19 @@ import com.ethereum.web3j.domains.security.Authority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import org.springframework.data.annotation.Transient;
+//import javax.persistence.Entity;
+//import javax.persistence.FetchType;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
+//import javax.persistence.ManyToMany;
+//import javax.persistence.Table;
+//import org.springframework.data.annotation.Transient;
 
 /**
  * @author I.T.W764
  */
-@Entity
-@Table(name = "betr_users")
+//@Entity
+//@Table(name = "betr_users")
 public class BetrUser extends AbstractDomainDateCreated {
 
   private static final long serialVersionUID = 2L;
@@ -37,10 +37,10 @@ public class BetrUser extends AbstractDomainDateCreated {
   private Integer failedLoginAttempts = 0;
 
   @JsonIgnore
-  @JoinTable(name = "users_x_authorities",
-          joinColumns = @JoinColumn(name = "user"),
-          inverseJoinColumns = @JoinColumn(name = "authority"))
-  @ManyToMany(fetch = FetchType.EAGER)
+//  @JoinTable(name = "users_x_authorities",
+//          joinColumns = @JoinColumn(name = "user"),
+//          inverseJoinColumns = @JoinColumn(name = "authority"))
+//  @ManyToMany(fetch = FetchType.EAGER)
   private Set<Authority> authorities = new HashSet<>();
 
   public BetrUser() {
@@ -154,13 +154,13 @@ public class BetrUser extends AbstractDomainDateCreated {
     this.authorities = auth;
   }
 
-  @Transient
+//  @Transient
   public void addAuthority(Authority auth) {
     this.authorities.add(auth);
 //    auth.addBetrUser(this);
   }
 
-  @Transient
+//  @Transient
   public void removeAuthority(Authority auth) {
     this.authorities.remove(auth);
 //    auth.removeBetrUser(this);
