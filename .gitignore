@@ -1,5 +1,4 @@
 /target/
-/nbactions.xml
 /betr.mv.db
 !.mvn/wrapper/maven-wrapper.jar
 
@@ -25,3 +24,4 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/nbactions.xml
