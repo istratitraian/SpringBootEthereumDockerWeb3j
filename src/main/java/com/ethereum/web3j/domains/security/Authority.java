@@ -6,20 +6,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.FetchType;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.JoinTable;
-//import javax.persistence.ManyToMany;
-//import javax.persistence.Table;
-//import org.springframework.data.annotation.Transient;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import org.springframework.data.annotation.Transient;
 
 /**
  * @author I.T.W764
  */
-//@Entity
-//@Table(name = "Authorities")
+@Entity
+@Table(name = "authorities")
 public class Authority extends AbstractDomain {
 
   private static final long serialVersionUID = 1L;
@@ -28,11 +26,11 @@ public class Authority extends AbstractDomain {
   private String authority;
 
   @JsonIgnore
-//  @JoinTable(name = "users_x_authorities",
-//          joinColumns = @JoinColumn(name = "authority"),
-//          inverseJoinColumns = @JoinColumn(name = "user"))
-//  @ManyToMany(fetch = FetchType.LAZY)
-  private Set<BetrUser> users = new HashSet<>();
+  @JoinTable(name = "users_x_authorities", joinColumns = {
+    @JoinColumn(name = "authorities_id", referencedColumnName = "id")}, inverseJoinColumns = {
+    @JoinColumn(name = "users_id", referencedColumnName = "id")})
+  @ManyToMany
+  private Set<BetrUser> userSet = new HashSet<>();
 
   public Authority() {
   }
@@ -49,23 +47,23 @@ public class Authority extends AbstractDomain {
     this.authority = role;
   }
 
-  public Set<BetrUser> getBetrUsers() {
-    return users;
+  public Set<BetrUser> getUserSet() {
+    return userSet;
   }
 
-  public void setBetrUsers(Set<BetrUser> users) {
-    this.users = users;
+  public void setUserSet(Set<BetrUser> userSet) {
+    this.userSet = userSet;
   }
 
-//  @Transient
+  @Transient
   public void addBetrUser(BetrUser user) {
-    this.users.add(user);
+    this.userSet.add(user);
 //    user.addAuthority(this);
   }
 
-//  @Transient
+  @Transient
   public void removeBetrUser(BetrUser user) {
-    this.users.remove(user);
+    this.userSet.remove(user);
 //    user.removeAuthority(this);
   }
 

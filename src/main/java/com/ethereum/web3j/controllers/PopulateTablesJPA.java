@@ -42,7 +42,7 @@ public class PopulateTablesJPA {
     user.setFirstName("Istrati");
     user.setLastName("Traian");
     user.setEmail("istrati.traian@yahoo.com");
-    user.setUsername("istrati.traian");
+//    user.setUsername("istrati.traian");
     user.setPhoneNumber("0744555666");
 
     user.setEncryptedPassword(passwordEncoder.encode(password));
@@ -62,7 +62,7 @@ public class PopulateTablesJPA {
     user1.setFirstName("Ion");
     user1.setLastName("manolache");
     user1.setEmail("ion.manolache@gmail.com");
-    user1.setUsername("ion.manolache");
+//    user1.setUsername("ion.manolache");
     user1.setPhoneNumber("0721222333");
 
     user1.setEncryptedPassword(passwordEncoder.encode(password));

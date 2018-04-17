@@ -1,25 +1,12 @@
 package com.ethereum.web3j.domains.repos;
 
-import java.util.Collection;
-import java.util.Optional;
-
 import com.ethereum.web3j.domains.BetrUser;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author I.T.W764
  */
-public interface BetrUserRepository
-// extends CrudRepository<BetrUser, Long>
-{
+public interface BetrUserRepository extends JpaRepository<BetrUser, Long> {
 
-	Optional<BetrUser> findByUsername(String username);
-
-        ////////////////////
-        
-	void save(BetrUser user);
-
-	Collection<Optional<BetrUser>> findAll();
-
-	Optional<BetrUser> findById(Long id);
-
+  BetrUser findByEmail(String email);
 }

@@ -3,10 +3,8 @@ package com.ethereum.web3j.controllers;
 import com.ethereum.web3j.domains.repos.BetrUserRepository;
 import com.ethereum.web3j.SBootEtherDock;
 import static com.ethereum.web3j.SBootEtherDock.password;
-import static com.ethereum.web3j.SBootEtherDock.walletMnemonic;
 import com.ethereum.web3j.SecurityConfig;
 import com.ethereum.web3j.domains.BetrUser;
-import com.ethereum.web3j.domains.repos.BetrUserRepoImpl;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -67,8 +65,8 @@ public class WalletController {
 
   @PostConstruct
   private void init() {
-    BetrUser user = betrUserRepository.findByUsername("istrati.traian").get();
-    BetrUser user1 = betrUserRepository.findByUsername("ion.manolache").get();
+    BetrUser user = betrUserRepository.findByEmail("istrati.traian@yahoo.com");
+    BetrUser user1 = betrUserRepository.findByEmail("ion.manolache@gmail.com");
 
     ownerCredentials = WalletUtils.loadBip39Credentials(
             SBootEtherDock.password,
@@ -87,7 +85,7 @@ public class WalletController {
   @GetMapping("")
   public List<BetrUser> wallet() {
     List<BetrUser> list = new ArrayList<>();
-    betrUserRepository.findAll().forEach(user -> list.add(user.get()));
+    betrUserRepository.findAll().forEach(list::add);
     return list;
   }
 
@@ -248,14 +246,14 @@ public class WalletController {
 
       BetrUser user = new BetrUser();
 
-      long id = BetrUserRepoImpl.getCountId();
+//      long id = BetrUserRepoImpl.getCountId();
       user.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
-      user.setEmail("newemail" + id + "@abc.com");
-      user.setFirstName("firstName" + id);
-      user.setLastName("lastName" + id);
+      user.setEmail("newemail@abc.com");
+      user.setFirstName("firstName");
+      user.setLastName("lastName");
       user.setEncryptedPassword(passwordEncoder.encode(password));
-      user.setUsername(user.getFirstName() + "." + user.getLastName());
-      user.setPhoneNumber("074455566" + id);
+//      user.setUsername(user.getFirstName() + "." + user.getLastName());
+      user.setPhoneNumber("074455566");
 
       user.setWalletMnemonic(mnemonic);
 
