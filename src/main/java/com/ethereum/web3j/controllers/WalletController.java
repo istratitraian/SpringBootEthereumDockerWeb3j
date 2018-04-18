@@ -253,7 +253,7 @@ public class WalletController {
 
 //      long id = BetrUserRepoImpl.getCountId();
       user.addAuthority(SecurityConfig.AUTHORITY_CLIENT);
-      user.setEmail(walletFile.getId()+"_newemail@abc.com");
+      user.setEmail(walletFile.getId().split("-")[0] + "_email@abc.com");
       user.setFirstName("firstName");
       user.setLastName("lastName");
       user.setEncryptedPassword(passwordEncoder.encode(password));
@@ -268,7 +268,6 @@ public class WalletController {
       user.setWalletAddress(userCreds.getAddress());
 
       betrUserRepository.save(user);
-
 
       return walletFile;
     } catch (CipherException ex) {
