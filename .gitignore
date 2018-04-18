@@ -25,3 +25,6 @@
 /nbdist/
 /.nb-gradle/
 /nbactions.xml
+/togenerate/
+/sbootetherdocker-0.1-SNAP-4.war
+/sbootetherdocker-0.1-SNAP-2awsdb.war
