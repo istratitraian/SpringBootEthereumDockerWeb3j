@@ -15,16 +15,16 @@ public class AbstractDomain implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  protected Integer id;
+  protected Long id;
 
   @Version
   private Integer version;
 
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

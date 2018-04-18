@@ -60,7 +60,7 @@ public class BetrUser extends AbstractDomainDateCreated {
   public BetrUser() {
   }
 
-  public BetrUser(Integer id) {
+  public BetrUser(Long id) {
     this.id = id;
   }
 
