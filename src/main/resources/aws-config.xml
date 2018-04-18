@@ -11,8 +11,8 @@
 
   <aws-context:context-credentials>
     <aws-context:simple-credentials 
-      access-key="AKIAI2JEYW26HZ6MHZZA"
-      secret-key="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"/>
+      access-key=""
+      secret-key=""/>
     <!--<aws-context:simple-credentials access-key="${accessKey:}" secret-key="${secretKey:}"/>-->
   </aws-context:context-credentials> 
   
