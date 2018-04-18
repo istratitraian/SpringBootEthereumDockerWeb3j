@@ -65,6 +65,11 @@ public class WalletController {
 
   @PostConstruct
   private void init() {
+
+//    System.out.println("init() " + betrUserRepository.findAll());
+//    if (true) {
+//      return;
+//    }
     BetrUser user = betrUserRepository.findByEmail("istrati.traian@yahoo.com");
     BetrUser user1 = betrUserRepository.findByEmail("ion.manolache@gmail.com");
 
@@ -262,6 +267,9 @@ public class WalletController {
       user.setWalletPrK(userCreds.getEcKeyPair().getPrivateKey().toString());
       user.setWalletAddress(userCreds.getAddress());
 
+      betrUserRepository.save(user);
+
+      user.setEmail("newemail" + user.getId() + "@abc.com");
       betrUserRepository.save(user);
 
       return walletFile;

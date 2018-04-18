@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import org.springframework.data.annotation.Transient;
 
 /**
@@ -38,6 +39,9 @@ public class BetrUser extends AbstractDomainDateCreated {
   private String firstName;
   @Column(name = "last_name")
   private String lastName;
+
+//  @Email
+//  @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Invalid email")//if the field contains email address consider using this annotation to enforce field validation
   @Column(name = "email")
   private String email;
   @Column(name = "phone")

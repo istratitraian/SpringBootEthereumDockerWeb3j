@@ -4,7 +4,6 @@ import com.ethereum.web3j.domains.security.Authority;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,9 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @author I.T.W764
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 //@EnableJpaRepositories("com.ethereum.web3j.domains.repos")
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig
+        //        extends ResourceServerConfigurerAdapter {
+        extends WebSecurityConfigurerAdapter {
 
   public static final Authority AUTHORITY_SU_ADMIN = new Authority("ADMIN");
   public static final Authority AUTHORITY_CLIENT = new Authority("CLIENT");
@@ -41,9 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //    auth.authenticationProvider(daoAuthenticationProvider());
 //  }
+  private static final String[] PUBLIC_MATCHERS = {};
+
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
+  public void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().anyRequest().permitAll();
+
+//    http.authorizeRequests()
+//            .antMatchers(PUBLIC_MATCHERS)
+//            .permitAll()
+//            .anyRequest()
+//            .authenticated();
 //    http
 //            .authorizeRequests().antMatchers("/rest/**").permitAll()
 //            .and().authorizeRequests().antMatchers("/wallet").permitAll().anyRequest().authenticated()
