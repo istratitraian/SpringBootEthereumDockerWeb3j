@@ -50,8 +50,6 @@ public class WalletController {
   @Autowired
   private BetrUserRepository betrUserRepository;
 
-  final static String PASS = "pass";
-
   private String toAddress;
 
   private Credentials ownerCredentials;

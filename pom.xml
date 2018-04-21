@@ -6,7 +6,7 @@
   <groupId>com.ethereum.web3j</groupId>
   <artifactId>sbootetherdocker</artifactId>
   <version>0.1-SNAP</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>sBootEtherDocker</name>
   <description>SpringBootEtherDockerAWS</description>
@@ -30,19 +30,22 @@
 
   <dependencies>
     
+<!--         <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <scope>provided</scope>
+    </dependency>-->
+    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
-
     
     <dependency>
       <groupId>org.web3j</groupId>
       <artifactId>web3j-spring-boot-starter</artifactId>
       <version>1.6.0</version>
     </dependency>
-    
     
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -60,12 +63,6 @@
       <scope>runtime</scope>
     </dependency>
     
-        <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    
     
 <!--    <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -73,14 +70,14 @@
       <version>1.2.2.RELEASE</version>
     </dependency>
     
-
+-->
     
     
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-aws-jdbc</artifactId>
       <version>1.2.2.RELEASE</version>
-    </dependency>-->
+    </dependency>
     
     
 <!--    <dependency>

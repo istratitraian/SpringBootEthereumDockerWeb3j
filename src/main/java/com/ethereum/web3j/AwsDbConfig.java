@@ -2,6 +2,10 @@ package com.ethereum.web3j;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 //import zipkin.server.EnableZipkinServer;
 
+import org.springframework.cloud.aws.jdbc.config.annotation.EnableRdsInstance;
+import org.springframework.context.annotation.Configuration;
+
+
 /**
  * @author I.T.W764
  */
